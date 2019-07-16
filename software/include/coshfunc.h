@@ -58,6 +58,7 @@ class CDistCosh : public CDistribution{
   void GenX(int ab,double &x,double &weight);
   Eigen::MatrixXd GenG0(int ab, Eigen::MatrixXd G);
   Eigen::MatrixXd FixG0(int ab, Eigen::MatrixXd G);
+  Eigen::MatrixXd Functions(int grid, double x);
   Eigen::MatrixXd FunctionSet(int grid, double x, int samples, int ab, int nmax, Eigen::MatrixXd G);
   double Integrate(int ab);
   double IntegrateNumerical(int ab);

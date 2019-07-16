@@ -31,13 +31,13 @@ class CBalanceModel:public CSystem{
   bool CUT_MODEL;
   bool CUT_EXP;
   bool CUT_WIDTH;
+  bool COMMON_WIDTH;
   bool CUT_G0;
+  bool FIX_G0;
   bool SCALE_X;
 
   //DATA PROCESSING INFO
   double PCA_CUTOFF;
-  bool USE_VAR;
-  bool MEAN_VAR;
   bool MEAN_ERROR;
   bool USE_MEAN_AS_ERROR;
   double MEAN_AS_ERROR;
@@ -98,6 +98,7 @@ class CBalanceModel:public CSystem{
   std::string MCMCTRACE_FILE;
   std::string MCMCHISTORY_FILE;
   std::string GAB_FILE;
+  std::string FULLG_FILE;
   std::string MINMAX_FILE;
   std::string POST_EXT;
   std::string FILE_EXT;
@@ -107,7 +108,6 @@ class CBalanceModel:public CSystem{
   Eigen::VectorXd ModelRapidity;
   std::vector<Eigen::MatrixXd> Model;
   std::vector<Eigen::MatrixXd> ModelError;
-  std::vector<Eigen::MatrixXd> ModelVariance;
   Eigen::VectorXd ExperimentRapidity;
   std::vector<Eigen::MatrixXd> Experiment;
   std::vector<Eigen::VectorXd> ExperimentalError;

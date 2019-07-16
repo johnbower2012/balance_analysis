@@ -9,9 +9,9 @@ void RemoveSpaces(std::string& str){
 }
 void LHCSampling(Eigen::MatrixXd &hypercube, int samples, Eigen::MatrixXd range){
   int parameters = range.rows();
-  int nmax = parameters/ab - 2;
+  //int nmax = parameters/ab - 2;
 
-  Eigen::VectorXd G = Eigen::VectorXd::Zero(ab);
+  //Eigen::VectorXd G = Eigen::VectorXd::Zero(ab);
   std::vector<int> hyperlist;
   hypercube = Eigen::MatrixXd::Zero(samples,parameters);
 
@@ -203,10 +203,12 @@ std::vector<Eigen::MatrixXd> CSystem::LoadFiles(std::string folder, std::string 
   char buffer[100];
   std::string line, file;
 
-  for(int i=start;i<finish;i++){
-    sprintf(buffer,"%s/run%04d/%s",folder.c_str(),i,filename.c_str());
+  for(int i=0;i<finish-start;i++){
+    sprintf(buffer,"%s/run%04d/%s",folder.c_str(),i+start,filename.c_str());
     file=buffer;
     loadMatrix[i]=this->LoadFile(file);
+    std::cout << file << std::endl;
+    std::cout << loadMatrix[i] << std::endl;
   }
 
   return loadMatrix;
@@ -270,7 +272,7 @@ void CSystem::WriteCSVFile(std::string filename, std::vector<std::string> header
 void CSystem::LoadParamFile(std::string filename, std::vector<std::string> &Distribution, std::vector<std::string> &Names, Eigen::MatrixXd &Matrix){
   std::string line,
     number;
-  std::size_t pos,length;
+  std::size_t pos;
   std::ifstream myfile(filename);
   int rows=0,row=0,
     cols=0,col=0,
@@ -366,8 +368,12 @@ void CSystem::WriteParamFileLoop(std::string filename, std::string folder, int s
   int cols = matrix.cols();
   std::fstream ofile;
   char file[100];
-  for(int row=start;row<rows+start;row++){
-    sprintf(file,"%s/run%04d/%s",folder.c_str(),row,filename.c_str());
+  char command[100];
+  for(int row=0;row<rows;row++){
+    sprintf(file,"%s/run%04d",folder.c_str(),row+start);
+    sprintf(command,"if [ ! -d %s ]; then mkdir -p %s; fi",file,file);
+    system(command);
+    sprintf(file,"%s/run%04d/%s",folder.c_str(),row+start,filename.c_str());
     ofile.open(file,std::ios::out);
     if(ofile.is_open()){
       for(int col=0;col<cols;col++){

@@ -1,18 +1,16 @@
 int START 0
-int FINISH 600
+int FINISH 300
 int QUARK_PAIRS 4
 int PRIN_COMP 4
-int NSAMPLES 500000
-int NTRACE 50000
+int NSAMPLES 100000
+int NTRACE 1000
 
 string EMULATOR_CHOICE GAUSSIAN_PROCESS
 string MCMC_CHOICE GAUSSIAN
 
 bool CUT_MODEL true
 bool CUT_EXP true
-bool CUT_WIDTH true
 bool COMMON_WIDTH true
-bool CUT_G0 true
 bool FIX_G0 true
 bool USE_SCALE_X true
 
@@ -42,7 +40,7 @@ int MINI_BATCH_SIZE 20
 int LAYERS 1
 int LAYER0_SIZE 100
 
-double MCMC_WIDTH 0.012
+double MCMC_WIDTH 0.01
 double MCMC_MIN 0.0
 double MCMC_MAX 1.0
 int MCMC_POST 20
@@ -65,7 +63,7 @@ string EXP_NAME_0 star_pipi.dat
 string EXP_NAME_1 star_pK.dat
 string EXP_NAME_2 star_KK.dat
 
-string OUTPUT_FOLDER stat_output
+string OUTPUT_FOLDER stat_output_300_9
 string RUN_FOLDER run
 string TRAINPOINTS_FILE trainplot
 string EXPZ_FILE expz
@@ -73,17 +71,13 @@ string EXPZ_FILE expz
 string PARAM_FILE parameters.dat
 string PARAM_FIXED_FILE fixed_parameters.dat
 string PARAM_PRIOR_FILE parameter_priors.dat
-string PARAMS_FILE lhc_parameters.dat
+string PARAMS_FILE lhc_parameters_300_9.dat
 string MCMCTRACE_FILE mcmctrace
 string MCMCHISTORY_FILE mcmchistory
 
 string GAB_FILE gabfunctions
+string FULLG_FILE fullg
 string MINMAX_FILE minmax
 string POST_EXT posterior
 string FILE_EXT dat
 string CSV_EXT csv
-
-
-
-
-

@@ -203,8 +203,8 @@ std::vector<Eigen::MatrixXd> CSystem::LoadFiles(std::string folder, std::string 
   char buffer[100];
   std::string line, file;
 
-  for(int i=start;i<finish;i++){
-    sprintf(buffer,"%s/run%04d/%s",folder.c_str(),i,filename.c_str());
+  for(int i=0;i<finish-start;i++){
+    sprintf(buffer,"%s/run%04d/%s",folder.c_str(),i+start,filename.c_str());
     file=buffer;
     loadMatrix[i]=this->LoadFile(file);
   }
@@ -366,8 +366,12 @@ void CSystem::WriteParamFileLoop(std::string filename, std::string folder, int s
   int cols = matrix.cols();
   std::fstream ofile;
   char file[100];
-  for(int row=start;row<rows+start;row++){
-    sprintf(file,"%s/run%04d/%s",folder.c_str(),row,filename.c_str());
+  char command[100];
+  for(int row=0;row<rows;row++){
+    sprintf(file,"%s/run%04d",folder.c_str(),row+start);
+    sprintf(command,"if [ ! -d %s ]; then mkdir -p %s; fi",file,file);
+    system(command);
+    sprintf(file,"%s/run%04d/%s",folder.c_str(),row+start,filename.c_str());
     ofile.open(file,std::ios::out);
     if(ofile.is_open()){
       for(int col=0;col<cols;col++){

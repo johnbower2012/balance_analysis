@@ -3,9 +3,6 @@
 #include<string>
 #include<vector>
 #include<stdlib.h>
-#include "system.h"
-#include "emulator.h"
-#include "parametermap.h"
 #include "balancemodel.h"
 
 

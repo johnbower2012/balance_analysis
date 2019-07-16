@@ -12,7 +12,8 @@
 int main(int argc, char* argv[]){
   if(argc == 2){
     int testZ = atoi(argv[1]);
-    printf("Running CBalanceModel on line %d from ModelZ.\n",testZ);
+    printf("Running CBalanceModel on line %d from ModelZ.",testZ);
+    std::cout << std::endl;
     CBalanceModel Run("run.dat",testZ);
   }else{
     int testZ = -1;

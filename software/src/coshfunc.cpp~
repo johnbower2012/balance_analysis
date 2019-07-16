@@ -211,6 +211,24 @@ Eigen::MatrixXd CDistCosh::GenG0(int ab, Eigen::MatrixXd G){
   }
   return newG;
 }
+Eigen::MatrixXd CDistCosh::FixG0(int ab, Eigen::MatrixXd G){
+  int nmax=G.cols()/ab-2,
+    samples=G.rows();
+  this->coshcalc.Set_NMax(nmax+1);
+  Eigen::MatrixXd newG = Eigen::MatrixXd::Zero(samples,ab*(nmax+2));
+  for(int i=0;i<samples;i++){
+    for(int j=0;j<ab;j++){
+      newG(i,j*(nmax+2)) = G(i,j*(nmax+2));
+      newG(i,j*(nmax+2)+1) = 1.0/G(i,j*(nmax+2));
+      for(int k=1;k<nmax+1;k++){
+	newG(i,j*(nmax+2)+k+1) = G(i,j*(nmax+2)+k);
+	newG(i,j*(nmax+2)+1) -= G(i,j*(nmax+2)+k)*this->coshcalc.Z(k);
+      }
+      newG(i,j*(nmax+2)+1) /= (this->coshcalc.Z(0));
+    }
+  }
+  return newG;
+}
 Eigen::MatrixXd CDistCosh::Functions(int n, double x){
   int ab = this->width.size();
   int nmax = this->g.cols();

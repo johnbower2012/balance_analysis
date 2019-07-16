@@ -30,7 +30,10 @@ class CBalanceModel:public CSystem{
 
   bool CUT_MODEL;
   bool CUT_EXP;
+  bool CUT_WIDTH;
+  bool COMMON_WIDTH;
   bool CUT_G0;
+  bool FIX_G0;
   bool SCALE_X;
 
   //DATA PROCESSING INFO
@@ -97,6 +100,7 @@ class CBalanceModel:public CSystem{
   std::string MCMCTRACE_FILE;
   std::string MCMCHISTORY_FILE;
   std::string GAB_FILE;
+  std::string FULLG_FILE;
   std::string MINMAX_FILE;
   std::string POST_EXT;
   std::string FILE_EXT;
@@ -115,6 +119,7 @@ class CBalanceModel:public CSystem{
   Eigen::MatrixXd McmcError;
 
   //MODEL PARAM MATRIX NAMES
+  Eigen::MatrixXd WidthParameters;
   Eigen::MatrixXd Parameters;
   Eigen::MatrixXd UnscaledParameters;  
   Eigen::MatrixXd MinMax;
